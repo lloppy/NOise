@@ -3,6 +3,7 @@ package com.ahandyapp.airnavx
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
@@ -15,9 +16,11 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.ahandyapp.airnavx.ui.sense.SoundMeter
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -30,7 +33,9 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
+
+    private var decibel: Double = 0.0
 
     private var map: GoogleMap? = null
     private var cameraPosition: CameraPosition? = null
@@ -87,52 +92,108 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onSaveInstanceState(outState)
     }
 
+
+
+
+
+
+
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.current_place_menu, menu)
         return true
     }
 
-
-
-
-
-
-
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.option_get_place) {
-           //...
+        if (item.itemId == R.id.info) {
+            val intent = Intent(this, MainActivity::class.java);
+            startActivity(intent);
         }
-
-        if (item.itemId == R.id.noisemets){
-            getDeviceLocation()
-            //addCircle()
-            showCurrentPlace()
+        if (item.itemId == R.id.noisemets) {
+            addCircle(decibel)
 
         }
         return true
     }
 
+    private fun addCircle(decibel: Double = 50.0) {
+        getDeviceLocation()
 
+        var decibelCl = SoundMeter(decibel)
+        var dDecibel = decibelCl.decibel
 
+        currlat = lastKnownLocation!!.latitude
+        currlong = lastKnownLocation!!.longitude
 
+        if (dDecibel < 30.0 ) {
+            val circle = map!!.addCircle(
 
-
-
-
-
-
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        this.map = map
-
-        val bundle = getIntent().extras
-        if (bundle != null) {
-            intent.putExtras(bundle);
+                CircleOptions()
+                    .center(LatLng(currlat, currlong))
+                    .radius(15.0)
+                    .strokeWidth(10f)
+                    .strokeColor(Color.GREEN)
+                    .fillColor(Color.argb(100, 183, 236, 185))
+                    .clickable(true)
+            )
         }
 
+        if (dDecibel >= 30.0 && dDecibel < 70.0) {
+            val circle = map!!.addCircle(
+                CircleOptions()
+                    .center(LatLng(currlat, currlong))
+                    .radius(15.0)
+                    .strokeWidth(10f)
+                    .strokeColor(Color.YELLOW)
+                    .fillColor(R.color.yellow)
+                    .clickable(true)
+            )
+        }
+
+        if (dDecibel >= 70.0 && dDecibel < 90.0) {
+            val circle = map!!.addCircle(
+                CircleOptions()
+                    .center(LatLng(currlat, currlong))
+                    .radius(15.0)
+                    .strokeWidth(10f)
+                    .strokeColor(R.color.orange)
+                    .fillColor(R.color.orange)
+                    .clickable(true)
+            )
+        }
+
+        if (dDecibel >= 90.0) {
+            val circle = map!!.addCircle(
+                CircleOptions()
+                    .center(LatLng(currlat, currlong))
+                    .radius(15.0)
+                    .strokeWidth(10f)
+                    .strokeColor(Color.RED)
+                    .fillColor(R.color.red)
+                    .clickable(true)
+            )
+        }
+
+
+
+
+
+
+
+        map!!.setOnCircleClickListener {
+            // Flip the r, g and b components of the circle's stroke color.
+            val strokeColor = it.strokeColor xor 0x00ffffff
+            it.strokeColor = strokeColor
+        }
+    }
+
+
+
+    override fun onMapReady(map: GoogleMap) {
+        this.map = map
+
+
         this.map?.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
-            // Return null here, so that getInfoContents() is called next.
             override fun getInfoWindow(arg0: Marker): View? {
                 return null
             }
@@ -160,6 +221,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Get the current location of the device and set the position of the map.
         getDeviceLocation()
     }
+    // [END maps_current_place_on_map_ready]
+
+    /**
+     * Gets the current location of the device, and positions the map's camera.
+     */
+    // [START maps_current_place_get_device_location]
     @SuppressLint("MissingPermission")
     private fun getDeviceLocation() {
         /*
@@ -174,16 +241,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
                         if (lastKnownLocation != null) {
-                            map?.moveCamera(CameraUpdateFactory.newLatLng(                                 LatLng(lastKnownLocation!!.latitude,
-                                lastKnownLocation!!.longitude)))
-
-                            //addCircle()
-
-
-
-
-
-
+                            map?.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                LatLng(lastKnownLocation!!.latitude,
+                                    lastKnownLocation!!.longitude), DEFAULT_ZOOM.toFloat()))
                         }
                     } else {
                         Log.d(TAG, "Current location is null. Using defaults.")
@@ -197,27 +257,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
         }
-    }
-
-    private fun addCircle() {
-        currlat =  lastKnownLocation!!.latitude
-        currlong = lastKnownLocation!!.longitude
-
-        val circle = map!!.addCircle(
-            CircleOptions()
-                .center(LatLng(currlat, currlong))
-                .radius(5.0)
-                .strokeWidth(10f)
-                .strokeColor(Color.GREEN)
-                .fillColor(Color.argb(128, 255, 0, 0))
-                .clickable(true)
-        )
-        map!!.setOnCircleClickListener {
-            // Flip the r, g and b components of the circle's stroke color.
-            val strokeColor = it.strokeColor xor 0x00ffffff
-            it.strokeColor = strokeColor
-        }
-
     }
     // [END maps_current_place_get_device_location]
 
@@ -240,9 +279,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
         }
     }
-
-
     // [END maps_current_place_location_permission]
+
     /**
      * Handles the result of the request for location permissions.
      */
@@ -365,6 +403,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             // Position the map's camera at the location of the marker.
             map?.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLatLng,
                 DEFAULT_ZOOM.toFloat()))
+            Toast.makeText(this, "message", Toast.LENGTH_SHORT).show()
         }
 
         // Display the dialog.
@@ -402,7 +441,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     companion object {
         private val TAG = MapsActivity::class.java.simpleName
-        private const val DEFAULT_ZOOM = 15
+        private const val DEFAULT_ZOOM = 19
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
 
         // Keys for storing activity state.
@@ -414,6 +453,4 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Used for selecting the current place.
         private const val M_MAX_ENTRIES = 5
     }
-
-
 }
