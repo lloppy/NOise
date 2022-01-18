@@ -3,11 +3,8 @@ package com.ahandyapp.airnavx.ui.home
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Camera
-import android.media.ThumbnailUtils
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -31,7 +28,6 @@ import com.ahandyapp.airnavx.ui.sense.SoundMeter
 import com.google.gson.Gson
 import java.io.File
 import java.io.IOException
-import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates

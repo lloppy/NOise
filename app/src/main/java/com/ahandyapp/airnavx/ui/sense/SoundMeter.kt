@@ -1,19 +1,24 @@
 package com.ahandyapp.airnavx.ui.sense
 
 import android.content.Context
+import android.content.Intent
 import android.media.MediaRecorder
 import android.util.Log
+import com.ahandyapp.airnavx.MainActivity
+import com.ahandyapp.airnavx.MapsActivity
 import java.io.File
+import java.io.Serializable
 import kotlin.math.log10
 import kotlin.math.truncate
 
-class SoundMeter(var decibel :  Double = 50.0) {
+class SoundMeter {
 
     // https://developer.android.com/guide/topics/media/mediarecorder
     // https://developer.android.com/reference/android/media/MediaRecorder
     // https://developer.android.com/reference/android/media/MediaRecorder#getMaxAmplitude()
     private val TAG = "SoundMeter"
     // accessed via fun deriveDecibel
+    private var decibel: Double = 0.0
 
     private var recorder: MediaRecorder? = null
     private var recorderStarted = false
@@ -63,6 +68,7 @@ class SoundMeter(var decibel :  Double = 50.0) {
             decibel = truncate(decibel)
         }
         Log.d(TAG, "SoundMeter.deriveDecibel ref->${ref.toString()}, amp->${amplitude.toString()}, db->${decibel.toString()}")
+
         return decibel
     }
 

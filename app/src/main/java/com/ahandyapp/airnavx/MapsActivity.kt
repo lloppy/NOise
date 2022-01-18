@@ -32,10 +32,9 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
+import kotlin.properties.Delegates
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
-
-    private var decibel: Double = 0.0
 
     private var map: GoogleMap? = null
     private var cameraPosition: CameraPosition? = null
@@ -60,6 +59,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
     private var likelyPlaceAttributions: Array<List<*>?> = arrayOfNulls(0)
     private var likelyPlaceLatLngs: Array<LatLng?> = arrayOfNulls(0)
 
+    private var soundMeter = SoundMeter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,9 +69,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION)
         }
 
-
         setContentView(R.layout.activity_maps)
-
 
         Places.initialize(applicationContext, BuildConfig.MAPS_API_KEY)
         placesClient = Places.createClient(this)
@@ -81,7 +79,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-
+        soundMeter.start(this)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -91,13 +89,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
         }
         super.onSaveInstanceState(outState)
     }
-
-
-
-
-
-
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.current_place_menu, menu)
@@ -110,22 +101,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
             startActivity(intent);
         }
         if (item.itemId == R.id.noisemets) {
-            addCircle(decibel)
-
+            addCircle()
         }
         return true
     }
 
-    private fun addCircle(decibel: Double = 50.0) {
+    private fun addCircle() {
         getDeviceLocation()
 
-        var decibelCl = SoundMeter(decibel)
-        var dDecibel = decibelCl.decibel
+        val decibel = soundMeter.deriveDecibel(forceFormat = true)
+        Log.e("DECIBEL", decibel.toString())
 
         currlat = lastKnownLocation!!.latitude
         currlong = lastKnownLocation!!.longitude
 
-        if (dDecibel < 30.0 ) {
+        if ( decibel < 30.0 ) {
             val circle = map!!.addCircle(
 
                 CircleOptions()
@@ -133,50 +123,46 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
                     .radius(15.0)
                     .strokeWidth(10f)
                     .strokeColor(Color.GREEN)
-                    .fillColor(Color.argb(100, 183, 236, 185))
+                    .fillColor(Color.GREEN)
                     .clickable(true)
             )
         }
 
-        if (dDecibel >= 30.0 && dDecibel < 70.0) {
+        if (decibel >= 30.0 && decibel < 60.0) {
             val circle = map!!.addCircle(
                 CircleOptions()
                     .center(LatLng(currlat, currlong))
                     .radius(15.0)
                     .strokeWidth(10f)
                     .strokeColor(Color.YELLOW)
-                    .fillColor(R.color.yellow)
+                    .fillColor(Color.YELLOW)
                     .clickable(true)
             )
         }
 
-        if (dDecibel >= 70.0 && dDecibel < 90.0) {
-            val circle = map!!.addCircle(
-                CircleOptions()
-                    .center(LatLng(currlat, currlong))
-                    .radius(15.0)
-                    .strokeWidth(10f)
-                    .strokeColor(R.color.orange)
-                    .fillColor(R.color.orange)
-                    .clickable(true)
-            )
-        }
-
-        if (dDecibel >= 90.0) {
+        if (decibel >= 60.0 && decibel < 80.0) {
             val circle = map!!.addCircle(
                 CircleOptions()
                     .center(LatLng(currlat, currlong))
                     .radius(15.0)
                     .strokeWidth(10f)
                     .strokeColor(Color.RED)
-                    .fillColor(R.color.red)
+                    .fillColor(Color.RED)
                     .clickable(true)
             )
         }
 
-
-
-
+        if (decibel >= 80.0) {
+            val circle = map!!.addCircle(
+                CircleOptions()
+                    .center(LatLng(currlat, currlong))
+                    .radius(15.0)
+                    .strokeWidth(10f)
+                    .strokeColor(Color.BLACK)
+                    .fillColor(Color.BLACK)
+                    .clickable(true)
+            )
+        }
 
 
 
