@@ -38,8 +38,8 @@
 <!--    Маша-->
     <ImageView
         android:id="@+id/tishk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="146dp"
+        android:layout_height="129dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/tishk"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +48,8 @@
 <!--    Макс-->
     <ImageView
         android:id="@+id/lovig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="146dp"
+        android:layout_height="129dp"
         android:src="@drawable/lovig"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tishk" />
@@ -57,8 +57,8 @@
 <!--    Полина-->
     <ImageView
         android:id="@+id/ank"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="146dp"
+        android:layout_height="129dp"
         android:src="@drawable/ankud"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lovig" />
@@ -66,8 +66,8 @@
     <!--    Тема-->
     <ImageView
         android:id="@+id/tema"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="146dp"
+        android:layout_height="129dp"
         android:src="@drawable/tema"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ank" />
