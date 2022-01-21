@@ -2,15 +2,15 @@
     <string name="app_name">NOise</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Aerial Inspector Recorder</string>
-    <string name="nav_header_subtitle">air@ahandyapp.com</string>
+    <string name="nav_header_title">Карта шумового загрязнения</string>
+    <string name="nav_header_subtitle">ankudinovapol@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_sense">Sense</string>
+    <string name="menu_home">Главная</string>
+    <string name="menu_sense">Отслеживание</string>
     <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_slideshow">Команда</string>
     <string name="title_activity_maps">MapsActivity</string>
 
 
@@ -23,5 +23,25 @@
     <string name="pick_place">Choose a place</string>
     <string name="noisemetr">Make noise circle</string>
 
+
+    <string name="about_app">Проект подразумевает создание вспомогательной карты для отслеживания уровня шумового загрязнения в городе Сочи с помощью сервисов ГИС</string>
+
+    <string name="tishkName">Тишкина Мария </string>
+    <string name="tishkProf">Работа с общественностью</string>
+
+
+    <string name="ankName">Анкудинова Полина</string>
+    <string name="ankProf">Android-разработчик</string>
+
+
+
+    <string name="lovigName">Ловыгин Максим</string>
+    <string name="lovigProf">Веб-разработчик</string>
+    <string name="temaN">Щелчков Артём</string>
+    <string name="temaProf">"Аналитик \nМониторинг информации "</string>
+
+
+    <!--    <string name="ankName">Анкудинова Полина</string>-->
+<!--    <string name="ankProf">Android-разработчик</string>-->
 
 </resources>

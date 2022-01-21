@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 class SenseViewModel : ViewModel() {
 
     private val _textTitle = MutableLiveData<String>().apply {
-        value = "SENSE!"
+        value = "Отслеживание параметров"
     }
     val textTitle: LiveData<String> = _textTitle
 

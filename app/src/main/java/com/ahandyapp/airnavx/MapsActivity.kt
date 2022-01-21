@@ -32,6 +32,8 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
@@ -40,6 +42,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
     private var cameraPosition: CameraPosition? = null
     private var currlat = 0.0
     private var currlong = 0.0
+
     // The entry point to the Places API.
     private lateinit var placesClient: PlacesClient
 
@@ -80,6 +83,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
         mapFragment.getMapAsync(this)
 
         soundMeter.start(this)
+
+
+
+
+        val fab = findViewById<FloatingActionButton>(R.id.fab_point)
+        fab.setOnClickListener { view ->
+            addCircle()
+        }
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -115,7 +127,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
         currlat = lastKnownLocation!!.latitude
         currlong = lastKnownLocation!!.longitude
 
-        if ( decibel < 30.0 ) {
+        if (decibel == 0.0) {
+            val circle = map!!.addCircle(
+
+                CircleOptions()
+                    .center(LatLng(currlat, currlong))
+                    .radius(1.0)
+                    .strokeWidth(1f)
+                    .strokeColor(Color.TRANSPARENT)
+                    .fillColor(Color.TRANSPARENT)
+                    .clickable(true)
+            )
+        }
+
+
+        if ( decibel <= 40.0 && decibel != 0.0 ) {
             val circle = map!!.addCircle(
 
                 CircleOptions()
@@ -128,7 +154,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
             )
         }
 
-        if (decibel >= 30.0 && decibel < 60.0) {
+        if (decibel > 40.0 && decibel <= 80.0) {
             val circle = map!!.addCircle(
                 CircleOptions()
                     .center(LatLng(currlat, currlong))
@@ -140,7 +166,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
             )
         }
 
-        if (decibel >= 60.0 && decibel < 80.0) {
+        if (decibel > 80.0 && decibel <= 120.0) {
             val circle = map!!.addCircle(
                 CircleOptions()
                     .center(LatLng(currlat, currlong))
@@ -152,7 +178,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
             )
         }
 
-        if (decibel >= 80.0) {
+        if (decibel > 120.0) {
             val circle = map!!.addCircle(
                 CircleOptions()
                     .center(LatLng(currlat, currlong))
@@ -177,6 +203,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
+        map.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_night));
+
 
 
         this.map?.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
@@ -226,16 +254,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
                     if (task.isSuccessful) {
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
-                        if (lastKnownLocation != null) {
-                            map?.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                LatLng(lastKnownLocation!!.latitude,
-                                    lastKnownLocation!!.longitude), DEFAULT_ZOOM.toFloat()))
-                        }
+//                        if (lastKnownLocation != null) {
+//                            map?.moveCamera(CameraUpdateFactory.newLatLngZoom(
+//                                LatLng(lastKnownLocation!!.latitude,
+//                                    lastKnownLocation!!.longitude), DEFAULT_ZOOM.toFloat()))
+//                        }
                     } else {
                         Log.d(TAG, "Current location is null. Using defaults.")
                         Log.e(TAG, "Exception: %s", task.exception)
-                        map?.moveCamera(CameraUpdateFactory
-                            .newLatLngZoom(defaultLocation, DEFAULT_ZOOM.toFloat()))
+//                        map?.moveCamera(CameraUpdateFactory
+//                            .newLatLngZoom(defaultLocation, DEFAULT_ZOOM.toFloat()))
                         map?.uiSettings?.isMyLocationButtonEnabled = false
                     }
                 }

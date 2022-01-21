@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.slideshow.SlideshowFragment">
 
     <TextView
@@ -15,8 +16,198 @@
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Наша команда:"
+        android:textColor="@color/grey"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    Маша-->
+    <ImageView
+        android:id="@+id/tishk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/tishk"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_gallery" />
+
+<!--    Макс-->
+    <ImageView
+        android:id="@+id/lovig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/lovig"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tishk" />
+
+<!--    Полина-->
+    <ImageView
+        android:id="@+id/ank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ankud"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lovig" />
+
+    <!--    Тема-->
+    <ImageView
+        android:id="@+id/tema"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tema"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ank" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/tishk"
+        app:layout_constraintStart_toEndOf="@+id/tishk"
+        app:layout_constraintTop_toTopOf="@+id/tishk">
+
+        <TextView
+            android:id="@+id/tishkN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tishkName"
+            android:textColor="@color/dark_yellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.468"
+            app:layout_constraintStart_toEndOf="@+id/tishk"
+            app:layout_constraintTop_toBottomOf="@+id/text_gallery" />
+
+        <TextView
+            android:id="@+id/tishk2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tishkProf"
+            android:textColor="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.468"
+            app:layout_constraintStart_toEndOf="@+id/tishk"
+            app:layout_constraintTop_toBottomOf="@+id/tishkN" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/lovig"
+        app:layout_constraintStart_toEndOf="@+id/lovig"
+        app:layout_constraintTop_toBottomOf="@+id/tishk">
+
+        <TextView
+            android:id="@+id/lovigN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lovigName"
+            android:textColor="@color/dark_yellow"
+            app:layout_constraintBottom_toTopOf="@+id/lovig2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/lovig" />
+
+        <TextView
+            android:id="@+id/lovig2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lovigProf"
+            android:textColor="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.571"
+            app:layout_constraintStart_toEndOf="@+id/lovig"
+            app:layout_constraintTop_toTopOf="@+id/lovig" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/ank"
+        app:layout_constraintStart_toEndOf="@+id/ank"
+        app:layout_constraintTop_toBottomOf="@+id/lovig">
+
+
+        <TextView
+            android:id="@+id/ankudN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ankName"
+            android:textColor="@color/dark_yellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ank"
+            app:layout_constraintTop_toTopOf="@+id/ank" />
+
+        <TextView
+            android:id="@+id/ank3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ankProf"
+            android:textColor="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.571"
+            app:layout_constraintStart_toEndOf="@+id/ank"
+            app:layout_constraintTop_toBottomOf="@+id/ankudN" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/tema"
+        app:layout_constraintStart_toEndOf="@+id/tema"
+        app:layout_constraintTop_toBottomOf="@+id/ank">
+
+        <TextView
+            android:id="@+id/temaN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/temaN"
+            android:textColor="@color/dark_yellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.468"
+            app:layout_constraintStart_toEndOf="@+id/tishk"
+            app:layout_constraintTop_toBottomOf="@+id/text_gallery" />
+
+        <TextView
+            android:id="@+id/tema2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/temaProf"
+            android:textColor="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.468"/>
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

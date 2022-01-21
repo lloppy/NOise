@@ -21,10 +21,13 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.ahandyapp.airnavx.MapsActivity
 import com.ahandyapp.airnavx.databinding.FragmentHomeBinding
 import com.ahandyapp.airnavx.model.AirCapture
 import com.ahandyapp.airnavx.ui.sense.AngleMeter
 import com.ahandyapp.airnavx.ui.sense.SoundMeter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import java.io.File
 import java.io.IOException
@@ -71,6 +74,14 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
 
+
+        val buttonMap: Button =  binding.buttonMap
+        // set on-click listener
+        buttonMap.setOnClickListener {
+            val intent = Intent(context, MapsActivity::class.java);
+            startActivity(intent)
+        }
+
         // get reference to button
         val buttonCameraIdString = "button_camera"
         val packageName = this.context?.getPackageName()
@@ -86,10 +97,8 @@ class HomeFragment : Fragment() {
         val imageViewId = resources.getIdentifier(imageViewIdString, "id", packageName)
         imageView = root.findViewById(imageViewId) as ImageView
 
-        //////////////////
         // angle meter one-time init
         angleMeter.create(requireActivity())
-        //////////////////
 
         return root
     }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.home.HomeFragment">
 
     <TextView
@@ -15,21 +16,37 @@
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+    android:id="@+id/text_home2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/header_text"
+    android:textAlignment="center"
+    android:textSize="20sp"
+        android:textColor="@color/grey"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:text="@string/about_app"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="62dp"
-        android:src="@drawable/baseline_flight_takeoff_24"
-        app:layout_constraintBottom_toTopOf="@+id/text_home"
+        android:src="@drawable/apppic"
+        app:layout_constraintBottom_toTopOf="@+id/header_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,11 +62,50 @@
         android:backgroundTint="@color/purple_200"
         android:text="Camera"
         android:textColor="#FFFFFF"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_home"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/header_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:text="О чем проект"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_home2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+
+    <TextView
+        android:id="@+id/header_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Наша команда"
+        android:textSize="30dp"
+        android:textColor="@color/dark_yellow"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_home2" />
+
+    <Button
+        android:id="@+id/buttonMap"
+        android:layout_width="325dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/dark_yellow"
+        android:text="Открыть карту"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_home2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
