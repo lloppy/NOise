@@ -10,8 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ahandyapp.airnavx.R
 import com.ahandyapp.airnavx.databinding.FragmentGalleryBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class GalleryFragment : Fragment() {
+
 
     private lateinit var galleryViewModel: GalleryViewModel
     private var _binding: FragmentGalleryBinding? = null
@@ -42,4 +46,6 @@ class GalleryFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

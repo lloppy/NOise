@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "518600907578",
+    "firebase_url": "https://mappoints-15aa1-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "mappoints-15aa1",
+    "storage_bucket": "mappoints-15aa1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518600907578:android:1da8cfd98e3d61b61c4e03",
+        "android_client_info": {
+          "package_name": "com.ahandyapp.airnavx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518600907578-05oite74sop1i3vd18p0k27e35it9tsh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL6HWdSIkr0sgylSGjXmvdP2f8xP2OQo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518600907578-05oite74sop1i3vd18p0k27e35it9tsh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

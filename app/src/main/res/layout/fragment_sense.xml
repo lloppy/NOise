@@ -75,7 +75,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:textColor="@color/grey"
-        android:text="Уровень децибелов:"
+        android:text="Уровень dB:"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
