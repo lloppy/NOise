@@ -31,4 +31,7 @@ Presentation in process...
 [See NOise\`s Presentation](https://onedrive.live.com/edit.aspx?resid=9BCF87FD9B23DB56!161&ithint=file%2cpptx&authkey=!AAa7KL6cuP3YYqg)
 
 
-![Иллюстрация к проекту](https://github.com/lloppy/FirePoint/blob/main/photo_2021-11-26_11-39-39.jpg)
+![Иллюстрация к проекту](https://github.com/lloppy/someBodyHelpMe/blob/main/image%204.png)
+![Иллюстрация к проекту](https://github.com/lloppy/someBodyHelpMe/blob/main/image%204.png)
+![Иллюстрация к проекту](https://github.com/lloppy/someBodyHelpMe/blob/main/image%204.png)
+![Иллюстрация к проекту](https://github.com/lloppy/someBodyHelpMe/blob/main/image%204.png)
