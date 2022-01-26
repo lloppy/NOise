@@ -7,9 +7,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
+import android.os.*
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.os.RemoteException
+import android.provider.SettingsSlicesContract.KEY_LOCATION
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -36,6 +36,8 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.util.*
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -45,6 +47,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var currlat = 0.0
     private var currlong = 0.0
     private var FLAG = true
+    private var timer: CountDownTimer? = null
 
     // The entry point to the Places API.
     private lateinit var placesClient: PlacesClient
@@ -66,7 +69,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var likelyPlaceAddresses: Array<String?> = arrayOfNulls(0)
     private var likelyPlaceAttributions: Array<List<*>?> = arrayOfNulls(0)
     private var likelyPlaceLatLngs: Array<LatLng?> = arrayOfNulls(0)
-
+    var handler: Handler = Handler()
+    var runnable: Runnable? = null
+    var delay = 15000
     private var soundMeter = SoundMeter()
 
     private lateinit var coordins: List<Double>
@@ -81,13 +86,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         setContentView(R.layout.activity_maps)
-
         setCircleFromDatabase()
 
-//
 //        var database = FirebaseDatabase.getInstance().reference.child("points")
 //        database.child(database.push().key ?: "blablabla").setValue(Points(currlat, currlong, decibel))
-//
 
         Places.initialize(applicationContext, BuildConfig.MAPS_API_KEY)
         placesClient = Places.createClient(this)
@@ -101,11 +103,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val fab = findViewById<FloatingActionButton>(R.id.fab_point)
         fab.setOnClickListener { view ->
-            addCircles()
-            setCircleFromDatabase()
+            Toast.makeText(this, "Отслеживание начато", Toast.LENGTH_SHORT).show()
+            handler.postDelayed(Runnable {
+                addCircles()
+                handler.postDelayed(runnable!!, delay.toLong())
+            }.also { runnable = it }, delay.toLong())
+        }
+
+
+        val fabInfo = findViewById<FloatingActionButton>(R.id.advice)
+        fabInfo.setOnClickListener { view ->
+            val intent = Intent(this, FabInfoActivity::class.java);
+            startActivity(intent)
         }
     }
 
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable!!)
+    }
 
     private fun setCircleFromDatabase() {
         val database2 = Firebase.database

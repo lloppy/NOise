@@ -23,6 +23,7 @@
 
 
 
+    tools:context=".ui.gallery.GalleryFragment">
 
 
 
@@ -30,7 +31,17 @@
 
 
 
-
+ <TextView
+        android:id="@+id/text_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 

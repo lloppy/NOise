@@ -9,7 +9,6 @@
     android:layout_height="match_parent"
     tools:context=".MapsActivity" >
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_point"
         android:layout_width="wrap_content"
@@ -18,7 +17,18 @@
         android:backgroundTint="@color/dark_yellow"
         android:src="@drawable/ic_point"
         android:contentDescription="@string/app_name"
-        android:layout_margin="16dp" />
+        android:layout_margin="10dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/advice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_yellow"
+        android:layout_gravity="top|start"
+        android:src="@drawable/info_circle"
+        android:contentDescription="@string/app_name"
+        android:layout_margin="10dp" />
+
 
     <ProgressBar
         android:id="@+id/progressBar"

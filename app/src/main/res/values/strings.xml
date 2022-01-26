@@ -9,7 +9,7 @@
 
     <string name="menu_home">Главная</string>
     <string name="menu_sense">Отслеживание</string>
-    <string name="menu_gallery">Gallery</string>
+    <string name="menu_gallery">Информация</string>
     <string name="menu_slideshow">Команда</string>
     <string name="title_activity_maps">MapsActivity</string>
 
@@ -34,14 +34,38 @@
     <string name="ankProf">Android-разработчик</string>
 
 
-
     <string name="lovigName">Ловыгин Максим</string>
     <string name="lovigProf">Веб-разработчик</string>
     <string name="temaN">Щелчков Артём</string>
     <string name="temaProf">"Аналитик \nМониторинг информации "</string>
+    <string name="yellowstr">Уровень шума в данной зоне нормальный для пребывания
+        \n
+    \nРекомендации: Постарайтесь находится в данной зоне , не более 5 часов
+\nВлияние на самочувствие при длительном воздействии:
+        \n
+\n- Головные боли
+\n- Звон в ушах
+\n- Психологический дискомфорт</string>
+    <string name="oranstr">Предупреждение! Данная зона не безопасна для нахождения здесь.
+        \n
+        \nРекомендации: Постарайтесь находится в данной зоне не более 2 часов 30 минут.
+        \nВлияние на самочувствие при длительном воздействии:
+        \n
+        \n- Временное лишение слуха
+        \n- Головные боли
+        \n- Нарушение перефирического кровообращения
+        \n- Раздражительность (вплоть до разрушения нервных клеток)</string>
+    <string name="redstr">Внимание! Постарайтесь находится в данной зоне не более 40 минут.
+        \n
+    \nВлияние на самочувствие при длительном воздействии:
+        \n
+\n- Сильные головокружения
+\n- Травмирование ушных клеток (могут лопнуть барабанные перепонки)
+\n- Возможна контузия
+\n- Разрушение нервной системы</string>
 
 
     <!--    <string name="ankName">Анкудинова Полина</string>-->
-<!--    <string name="ankProf">Android-разработчик</string>-->
+    <!--    <string name="ankProf">Android-разработчик</string>-->
 
 </resources>
