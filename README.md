@@ -32,6 +32,6 @@ Presentation in process...
 
 
 ![Иллюстрация к проекту](https://github.com/lloppy/someBodyHelpMe/blob/main/image%204.png)
-![Иллюстрация к проекту](https://github.com/lloppy/someBodyHelpMe/blob/main/image%204.png)
-![Иллюстрация к проекту](https://github.com/lloppy/someBodyHelpMe/blob/main/image%204.png)
-![Иллюстрация к проекту](https://github.com/lloppy/someBodyHelpMe/blob/main/image%204.png)
+![Иллюстрация к проекту](https://github.com/lloppy/someBodyHelpMe/blob/main/image%203.png)
+![Иллюстрация к проекту](https://github.com/lloppy/someBodyHelpMe/blob/main/image%202.png)
+![Иллюстрация к проекту](https://github.com/lloppy/someBodyHelpMe/blob/main/image%201.png)
