@@ -1,0 +1,124 @@
+
+//        var database = FirebaseDatabase.getInstance().reference
+//        database.child("points").setValue(Points(currlat, currlong, decibel))
+//        var getData = object : ValueEventListener{
+//            override fun onCancelled (p0: DatabaseError){
+//            }
+//            override fun onDataChange (p0: DataSnapshot){
+//                var sb = StringBuilder()
+//                for (i in p0.children){
+//                    var currlat  = i.child("lat").getValue()
+//                    var currlong  = i.child("lng").getValue()
+//                    sb.append("${i.key} $currlat $currlong ")
+//                    Log.i("firebase", "${sb}")
+//                }
+//            }
+//        }
+
+
+//        database = Firebase.database.reference.child("points")
+//        database.child(database.push().key ?: "blablabla").child("points").setValue("$currlat $currlong")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private fun addCircle() {
+        getDeviceLocation()
+
+
+        currlat = lastKnownLocation!!.latitude
+        currlong = lastKnownLocation!!.longitude
+        val value = 10.0
+        decibel= soundMeter.deriveDecibel(forceFormat = true)
+
+        val myRef = database.getReference("points")
+
+        myRef.child(myRef.push().key ?: "blablabla").setValue(Points(currlat,currlong,decibel))
+
+
+        if (FLAG == true) {
+            myRef.get().addOnSuccessListener {
+                val map = (it.value as Map<String, Objects>)
+                for (entry in map.entries){
+                    var eMap = entry.value as  Map<String, Objects>
+                    var entr = eMap.entries as Set
+
+                    var dbCoord = entr.elementAt(1).toString().replace("db=", "", true).toDouble()
+                    var lngCoord = entr.first().toString().replace("lng=", "", true).toDouble()
+                    var latCoord = entr.last().toString().replace("lat=", "", true).toDouble()
+
+                    val coordins: List<Double> = listOf(latCoord,lngCoord, dbCoord)
+
+                    Log.i("firebase", "${coordins} ")
+
+                }
+            }.addOnFailureListener{
+            }
+            !FLAG
+
+        }
+
+
+
+
+
+
+
+
+
+
+        val map = (it.value as Map<String, Objects>)
+                    val mMap = map.values
+                    for(i in mMap){
+
+                        Log.i("firebase", "${i} ")
+
+                    }
+
+
+
+
+
+
+
+
+
+    private fun loadCircleFromDatabase() {
+        for (i in arr){
+            if ((i%3).equals(0)) {
+                var arrThreeDb = listOf<Double>()
+                arrThreeDb += i
+                Log.i("firebase", "${arrThreeDb}")
+
+            }
+
+            if ((i%3).equals(2)) {
+                var arrTwoLng = listOf<Double>()
+                arrTwoLng += i
+            }
+
+
+            if ((i%3).equals(1)) {
+                var arrFirstLat = listOf<Double>()
+                arrFirstLat += i
+            }
+
+
+        }
+    }
