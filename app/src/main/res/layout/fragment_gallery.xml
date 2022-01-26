@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="120 - 160 Db"
-                android:textColor="@color/dark_yellow"
+                android:textColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.468"
                 app:layout_constraintStart_toEndOf="@+id/tishk"
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="80 - 120 Db"
-                android:textColor="@color/dark_yellow"
+                android:textColor="@color/orange"
                 app:layout_constraintBottom_toTopOf="@+id/lovig2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/lovig" />
@@ -139,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="40 - 80 Db"
-                android:textColor="@color/dark_yellow"
+                android:textColor="@color/yellow"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ank"
                 app:layout_constraintTop_toTopOf="@+id/ank" />
