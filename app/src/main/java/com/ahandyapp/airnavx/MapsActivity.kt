@@ -69,9 +69,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var likelyPlaceAddresses: Array<String?> = arrayOfNulls(0)
     private var likelyPlaceAttributions: Array<List<*>?> = arrayOfNulls(0)
     private var likelyPlaceLatLngs: Array<LatLng?> = arrayOfNulls(0)
+
     var handler: Handler = Handler()
     var runnable: Runnable? = null
     var delay = 15000
+
     private var soundMeter = SoundMeter()
 
     private lateinit var coordins: List<Double>
@@ -85,11 +87,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION)
         }
 
+
         setContentView(R.layout.activity_maps)
         setCircleFromDatabase()
 
 //        var database = FirebaseDatabase.getInstance().reference.child("points")
 //        database.child(database.push().key ?: "blablabla").setValue(Points(currlat, currlong, decibel))
+
 
         Places.initialize(applicationContext, BuildConfig.MAPS_API_KEY)
         placesClient = Places.createClient(this)
@@ -104,10 +108,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val fab = findViewById<FloatingActionButton>(R.id.fab_point)
         fab.setOnClickListener { view ->
             Toast.makeText(this, "Отслеживание начато", Toast.LENGTH_SHORT).show()
-            handler.postDelayed(Runnable {
-                addCircles()
-                handler.postDelayed(runnable!!, delay.toLong())
-            }.also { runnable = it }, delay.toLong())
+            onResume()
         }
 
 
@@ -118,6 +119,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    override fun onResume() {
+        handler.postDelayed(Runnable {
+            handler.postDelayed(runnable!!, delay.toLong())
+            addCircles()
+        }.also { runnable = it }, delay.toLong())
+        super.onResume()
+    }
 
     override fun onPause() {
         super.onPause()
