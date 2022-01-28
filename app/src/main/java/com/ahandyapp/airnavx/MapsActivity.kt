@@ -2,6 +2,7 @@ package com.ahandyapp.airnavx
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -38,6 +39,9 @@ import com.google.firebase.ktx.Firebase
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import android.location.LocationManager
+import android.provider.Settings
+import java.lang.Exception
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -61,6 +65,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     // not granted.
     private val defaultLocation = LatLng(-33.8523341, 151.2106085)
     private var locationPermissionGranted = false
+    private var locationManager: LocationManager? = null
+    var geolocationEnabled = false
+
 
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
@@ -87,7 +94,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION)
         }
 
-
+        Toast.makeText(this, "Загрузка карты...", Toast.LENGTH_LONG).show()
         setContentView(R.layout.activity_maps)
         setCircleFromDatabase()
 
@@ -124,6 +131,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             handler.postDelayed(runnable!!, delay.toLong())
             addCircles()
         }.also { runnable = it }, delay.toLong())
+
+        checkLocationServiceEnabled()
         super.onResume()
     }
 
@@ -194,8 +203,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         for ( i in elem downTo 0 step 3){
 
-            Log.i("firebase", " aaaa ${i}")
-            Log.i("firebase", " aaaa ${arr[i]}")
+//            Log.i("firebase", " aaaa ${i}")
+//            Log.i("firebase", " aaaa ${arr[i]}")
 
 //            Log.i("firebase", " aaaaaaaaaa ${arr[i]}")
 //            Log.i("firebase", " lat ${arr[i -2]}")
@@ -212,37 +221,72 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         .clickable(true)
                 )
             }
-            if (arr[i] <= 40.0 && arr[i] != 0.0) {
+            if (arr[i] <= 35.0 && arr[i] != 0.0) {
                 val circle = map!!.addCircle(
                     CircleOptions()
                         .center(LatLng(arr[i-2], arr[i-1]))
                         .radius(value)
                         .strokeWidth(10f)
-                        .strokeColor(Color.argb(27, 0, 255, 10))
-                        .fillColor(Color.argb(27, 0, 255, 10))
+                        .strokeColor(Color.argb(52, 8, 129, 0))
+                        .fillColor(Color.argb(57, 8, 129, 0))
+                        .clickable(true)
+                )
+            }
+            if (arr[i]  > 35.0 && arr[i] <= 45.0) {
+                val circle = map!!.addCircle(
+                    CircleOptions()
+                        .center(LatLng(arr[i-2], arr[i-1]))
+                        .radius(value)
+                        .strokeWidth(10f)
+                        .strokeColor(Color.argb(48, 15, 226, 0))
+                        .fillColor(Color.argb(53, 15, 226, 0))
                         .clickable(true)
                 )
             }
 
-            if (arr[i]  > 40.0 && arr[i] <= 80.0) {
+            if (arr[i]  > 45.0 && arr[i] <= 65.0) {
                 val circle = map!!.addCircle(
                     CircleOptions()
                         .center(LatLng(arr[i-2], arr[i-1]))
                         .radius(value)
                         .strokeWidth(10f)
-                        .strokeColor(Color.argb(33, 255, 229, 0))
-                        .fillColor(Color.argb(33, 255, 229, 0))
+                        .strokeColor(Color.argb(38, 163, 247, 0))
+                        .fillColor(Color.argb(43, 163, 247, 0))
                         .clickable(true)
                 )
             }
-            if (arr[i] > 80.0 && arr[i]<= 120.0) {
+
+            if (arr[i]  > 65.0 && arr[i] <= 80.0) {
                 val circle = map!!.addCircle(
                     CircleOptions()
                         .center(LatLng(arr[i-2], arr[i-1]))
                         .radius(value)
                         .strokeWidth(10f)
-                        .strokeColor(Color.argb(37, 255, 153, 0))
-                        .fillColor(Color.argb(37, 255, 153, 0))
+                        .strokeColor(Color.argb(32, 255, 210, 0))
+                        .fillColor(Color.argb(37, 255, 210, 0))
+                        .clickable(true)
+                )
+            }
+
+            if (arr[i] > 80.0 && arr[i]<= 100.0) {
+                val circle = map!!.addCircle(
+                    CircleOptions()
+                        .center(LatLng(arr[i-2], arr[i-1]))
+                        .radius(value)
+                        .strokeWidth(10f)
+                        .strokeColor(Color.argb(42, 255, 170, 0))
+                        .fillColor(Color.argb(47, 255, 170, 0))
+                        .clickable(true)
+                )
+            }
+            if (arr[i] > 100.0 && arr[i]<= 120.0) {
+                val circle = map!!.addCircle(
+                    CircleOptions()
+                        .center(LatLng(arr[i-2], arr[i-1]))
+                        .radius(value)
+                        .strokeWidth(10f)
+                        .strokeColor(Color.argb(50, 255, 61, 0))
+                        .fillColor(Color.argb(55, 255, 61, 0))
                         .clickable(true)
                 )
             }
@@ -252,8 +296,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         .center(LatLng(arr[i-2], arr[i-1]))
                         .radius(value)
                         .strokeWidth(10f)
-                        .strokeColor(Color.argb(45, 255, 61, 0))
-                        .fillColor(Color.argb(45, 255, 61, 0))
+                        .strokeColor(Color.argb(55, 255, 0, 0))
+                        .fillColor(Color.argb(55, 255, 0, 0))
                         .clickable(true)
                 )
             }
@@ -269,36 +313,69 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .clickable(true)
             )
         }
-        if (decibel <= 40.0 && decibel != 0.0) {
+        if (decibel <= 35.0 && decibel != 0.0) {
             val circle = map!!.addCircle(
                 CircleOptions()
                     .center(LatLng(currlat, currlong))
                     .radius(value)
                     .strokeWidth(10f)
-                    .strokeColor(Color.argb(27, 0, 255, 10))
-                    .fillColor(Color.argb(27, 0, 255, 10))
+                    .strokeColor(Color.argb(42, 8, 129, 0))
+                    .fillColor(Color.argb(47, 8, 129, 0))
                     .clickable(true)
             )
         }
-        if (decibel > 40.0 && decibel <= 80.0) {
+        if (decibel > 35.0 && decibel <= 45.0) {
             val circle = map!!.addCircle(
                 CircleOptions()
                     .center(LatLng(currlat, currlong))
                     .radius(value)
                     .strokeWidth(10f)
-                    .strokeColor(Color.argb(33, 255, 229, 0))
-                    .fillColor(Color.argb(33, 255, 229, 0))
+                    .strokeColor(Color.argb(48, 15, 226, 0))
+                    .fillColor(Color.argb(53, 15, 226, 0))
                     .clickable(true)
             )
         }
-        if (decibel > 80.0 && decibel <= 120.0) {
+        if (decibel > 45.0 && decibel <= 65.0) {
             val circle = map!!.addCircle(
                 CircleOptions()
                     .center(LatLng(currlat, currlong))
                     .radius(value)
                     .strokeWidth(10f)
-                    .strokeColor(Color.argb(37, 255, 153, 0))
-                    .fillColor(Color.argb(37, 255, 153, 0))
+                    .strokeColor(Color.argb(38, 163, 247, 0))
+                    .fillColor(Color.argb(43, 163, 247, 0))
+                    .clickable(true)
+            )
+        }
+        if (decibel > 65.0 && decibel <= 80.0) {
+            val circle = map!!.addCircle(
+                CircleOptions()
+                    .center(LatLng(currlat, currlong))
+                    .radius(value)
+                    .strokeWidth(10f)
+                    .strokeColor(Color.argb(32, 255, 210, 0))
+                    .fillColor(Color.argb(37, 255, 210, 0))
+                    .clickable(true)
+            )
+        }
+        if (decibel > 80.0 && decibel <= 100.0) {
+            val circle = map!!.addCircle(
+                CircleOptions()
+                    .center(LatLng(currlat, currlong))
+                    .radius(value)
+                    .strokeWidth(10f)
+                    .strokeColor(Color.argb(42, 255, 170, 0))
+                    .fillColor(Color.argb(47, 255, 170, 0))
+                    .clickable(true)
+            )
+        }
+        if (decibel > 100.0 && decibel <= 120.0) {
+            val circle = map!!.addCircle(
+                CircleOptions()
+                    .center(LatLng(currlat, currlong))
+                    .radius(value)
+                    .strokeWidth(10f)
+                    .strokeColor(Color.argb(50, 255, 61, 0))
+                    .fillColor(Color.argb(55, 255, 61, 0))
                     .clickable(true)
             )
         }
@@ -308,8 +385,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .center(LatLng(currlat, currlong))
                     .radius(value)
                     .strokeWidth(10f)
-                    .strokeColor(Color.argb(45, 255, 61, 0))
-                    .fillColor(Color.argb(45, 255, 61, 0))
+                    .strokeColor(Color.argb(50, 255, 0, 0))
+                    .fillColor(Color.argb(55, 255, 0, 0))
                     .clickable(true)
             )
         }
@@ -524,6 +601,33 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    private fun checkLocationServiceEnabled(): Boolean {
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        try {
+            geolocationEnabled = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        } catch (ex: Exception) {
+        }
+        return buildAlertMessageNoLocationService(geolocationEnabled)
+    }
+
+    /**
+     * Показываем диалог и переводим пользователя к настройкам геолокации
+     */
+    private fun buildAlertMessageNoLocationService(network_enabled: Boolean): Boolean {
+        val msg = if (!network_enabled) resources.getString(R.string.msg_switch_network) else null
+        if (msg != null) {
+            val builder = AlertDialog.Builder(this)
+            builder.setCancelable(false)
+                .setMessage(msg)
+                .setPositiveButton(
+                    "Включить"
+                ) { dialog, id -> startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)) }
+            val alert = builder.create()
+            alert.show()
+            return true
+        }
+        return false
+    }
     companion object {
         private val TAG = MapsActivity::class.java.simpleName
         private const val DEFAULT_ZOOM = 19

@@ -24,7 +24,7 @@
     <string name="noisemetr">Make noise circle</string>
 
 
-    <string name="about_app">Проект подразумевает создание вспомогательной карты для отслеживания уровня шумового загрязнения в городе Сочи с помощью сервисов ГИС</string>
+    <string name="about_app">Проект подразумевает создание вспомогательной карты для отслеживания уровня шумового загрязнения с помощью сервисов ГИС</string>
 
     <string name="tishkName">Тишкина Мария </string>
     <string name="tishkProf">Работа с общественностью</string>
@@ -63,6 +63,8 @@
 \n- Травмирование ушных клеток (могут лопнуть барабанные перепонки)
 \n- Возможна контузия
 \n- Разрушение нервной системы</string>
+    <string name="msg_switch_network">Для корректной работы приложения необходимо включить геолокацию</string>
+    <string name="text_with_link"><a href="https://still-basin-43476.herokuapp.com/">Веб-версия</a> </string>
 
 
     <!--    <string name="ankName">Анкудинова Полина</string>-->

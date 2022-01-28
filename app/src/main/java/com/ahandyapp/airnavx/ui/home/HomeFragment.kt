@@ -34,6 +34,12 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates
+import android.text.method.LinkMovementMethod
+
+import android.R
+
+
+
 
 class HomeFragment : Fragment() {
 
@@ -74,6 +80,12 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
 
+        val tv = binding.textView2
+        tv.movementMethod = LinkMovementMethod.getInstance()
+        tv.setOnClickListener {
+            Toast.makeText(context, "Переход на Web-сайт", Toast.LENGTH_SHORT).show()
+        }
+
 
         val buttonMap: Button =  binding.buttonMap
         // set on-click listener
@@ -101,6 +113,8 @@ class HomeFragment : Fragment() {
         angleMeter.create(requireActivity())
 
         return root
+
+
     }
 
     override fun onDestroyView() {
