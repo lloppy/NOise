@@ -29,7 +29,7 @@
             android:id="@+id/lovig"
             android:layout_width="110dp"
             android:layout_height="100dp"
-            android:layout_marginTop="170dp"
+            android:layout_marginTop="190dp"
             android:src="@drawable/oring"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tishk" />
@@ -38,7 +38,7 @@
             android:id="@+id/ank"
             android:layout_width="110dp"
             android:layout_height="100dp"
-            android:layout_marginTop="170dp"
+            android:layout_marginTop="190dp"
             android:src="@drawable/yellow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lovig" />
@@ -47,7 +47,7 @@
             android:id="@+id/tema"
             android:layout_width="110dp"
             android:layout_height="100dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="110dp"
             android:src="@drawable/green"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ank" />
@@ -76,7 +76,7 @@
 
             <TextView
                 android:id="@+id/tishk2"
-                android:layout_width="280dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="@string/redstr"
                 android:textColor="@color/grey"
@@ -111,7 +111,7 @@
 
             <TextView
                 android:id="@+id/lovig2"
-                android:layout_width="280dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="@string/oranstr"
                 android:textColor="@color/grey"
@@ -146,7 +146,7 @@
 
             <TextView
                 android:id="@+id/ank3"
-                android:layout_width="280dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="@string/yellowstr"
                 android:textColor="@color/grey"
@@ -181,7 +181,7 @@
 
             <TextView
                 android:id="@+id/tema2"
-                android:layout_width="280dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Уровень шума в данной зоне оптимальный для пребывания \nРекомендации : нет"
                 android:textColor="@color/grey"
